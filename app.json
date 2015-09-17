@@ -1,0 +1,44 @@
+{
+  "name": "Node.js/Express Starter",
+  "description": "Starter Application for Node.js",
+  "keywords": [
+    "twilio",
+    "node.js",
+    "mongodb",
+    "mongoose",
+    "express"
+  ],
+  "env": {
+    "TWILIO_ACCOUNT_SID": {
+      "description": "API username - find your account SID at https://www.twilio.com/user/account/voice-messaging",
+      "required": true
+    },
+    "TWILIO_AUTH_TOKEN": {
+      "description": "API password - find your auth token at https://www.twilio.com/user/account/voice-messaging",
+      "required": true
+    },
+    "TWILIO_NUMBER": {
+      "description": "A number in your Twilio account to use with this application in E.164 format (e.g. +16518675309) - view your numbers at https://www.twilio.com/user/account/phone-numbers/incoming",
+      "required": true
+    },
+    "MY_NUMBER": {
+      "description": "Your own mobile phone number! The app will be calling and texting you. Specify in E.164 format (e.g. +16519991111)",
+      "required": false
+    },
+    "HTTP_BASIC_USERNAME": {
+      "description": "HTTP Basic Auth username to log into this demo app (default: admin)",
+      "required": false
+    },
+    "HTTP_BASIC_PASSWORD": {
+      "description": "HTTP Basic Auth username to log into this demo app (default: password)",
+      "required": false
+    }
+  },
+  "website": "https://github.com/TwilioDevEd/starter-node-express",
+  "repository": "https://github.com/TwilioDevEd/starter-node-express",
+  "logo": "https://s3.amazonaws.com/howtodocs/twilio-logo.png",
+  "success_url": "/",
+  "addons": [
+    "mongolab"
+  ]
+}
