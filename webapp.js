@@ -5,7 +5,9 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var morgan = require('morgan');
 var csurf = require('csurf');
+
 var config = require('./config');
+var twilioNotifications = require('./twilioNotifications');
 
 // Create Express web app
 var app = express();
@@ -55,14 +57,16 @@ app.use(function(request, response, next) {
   response.sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
+
 // Unhandled errors (500)
 app.use(function(err, request, response, next) {
+  twilioNotifications.notifyOnError(err);
   console.error('An application error has occurred:');
-  console.error(err);
   console.error(err.stack);
   response.status(500);
   response.sendFile(path.join(__dirname, 'public', '500.html'));
 });
+
 
 // Export Express app
 module.exports = app;

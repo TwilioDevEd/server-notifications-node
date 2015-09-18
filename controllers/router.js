@@ -1,4 +1,6 @@
 // Map routes to controller functions
 module.exports = function(router) {
-  router.get('/', function(req, resp) { return resp.send('hello'); });
+  router.get('/error', function(req, resp) {
+    throw new Error('Uh on an error happened');
+  });
 };
