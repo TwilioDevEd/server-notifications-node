@@ -1,0 +1,6 @@
+{
+    "title": "Server Notifications & Alerts",
+    "description": "Never miss another server outage. Learn how to build a server notification system that will alert all administrators via SMS when a server outage occurs.",
+    "repo": "TwilioDevEd/server-notifications-laravel",
+    "heroku": true
+}
