@@ -1,6 +1,4 @@
-// jshint multistr:true
-
-var twilioClient = require('./twilioClient');
+var twilioClient = require('../twilioClient');
 var fs = require('fs');
 var _ = require('underscore');
 

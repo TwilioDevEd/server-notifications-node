@@ -7,7 +7,7 @@ var morgan = require('morgan');
 var csurf = require('csurf');
 
 var config = require('./config');
-var twilioNotifications = require('./twilioNotifications');
+var twilioNotifications = require('./middleware/twilioNotifications');
 
 // Create Express web app
 var app = express();

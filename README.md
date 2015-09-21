@@ -49,7 +49,7 @@ application when you change any source code files.
 
 Make sure you have customized the `config/administrators.json` file
 with your phone number and then open
-(http://localhost:3000/error). You'll get a text message shortly
+[http://localhost:3000/error](http://localhost:3000/error). You'll get a text message shortly
 informing you of an exception.
 
 ```bash
