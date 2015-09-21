@@ -68,6 +68,5 @@ app.use(function(err, request, response, next) {
   response.sendFile(path.join(__dirname, 'public', '500.html'));
 });
 
-
 // Export Express app
 module.exports = app;
