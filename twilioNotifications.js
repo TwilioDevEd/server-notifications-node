@@ -2,7 +2,7 @@ var twilioClient = require('./twilioClient');
 var fs = require('fs');
 var _ = require('underscore');
 
-module.exports.notifyOnError = function(appError) {
+module.exports.notifyOnError = function(appError, request, response, next) {
   fs.readFile('./config/administrators.json', 'utf8', function(readError, fileData) {
     if (readError) {
       console.error('Could not read administrators file: ' + readError.toString());
@@ -14,4 +14,5 @@ module.exports.notifyOnError = function(appError) {
       });
     }
   });
+  next();
 };

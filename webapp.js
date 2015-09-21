@@ -57,10 +57,11 @@ app.use(function(request, response, next) {
   response.sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
+// Mount middleware to notify Twilio of errors
+app.use(twilioNotifications.notifyOnError);
 
 // Unhandled errors (500)
 app.use(function(err, request, response, next) {
-  twilioNotifications.notifyOnError(err);
   console.error('An application error has occurred:');
   console.error(err.stack);
   response.status(500);
