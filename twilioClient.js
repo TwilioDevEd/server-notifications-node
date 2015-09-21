@@ -6,10 +6,12 @@ module.exports.sendSms = function(to, message) {
     body: message,
     to: to,
     from: config.sendingNumber
-  }).then(function() {
-    console.log('Administrator notified');
-  }).catch(function(error) {
-    console.error('Could not notify administrator');
-    console.error(error);
+  }, function(err, data) {
+    if (err) {
+      console.error('Could not notify administrator');
+      console.error(err);
+    } else {
+      console.log('Administrator notified');
+    }
   });
 };
