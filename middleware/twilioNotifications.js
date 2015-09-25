@@ -1,27 +1,18 @@
 var twilioClient = require('../twilioClient');
 var fs = require('fs');
-var _ = require('underscore');
+var admins = require('../config/administrators.json');
 
-var formatMessage = function(errorToReport) {
+function formatMessage(errorToReport) {
   return '[This is a test] ALERT! It appears the server is' +
     'having issues. Exception: ' + errorToReport +
-    '. Go to: http://newrelic.com' +
+    '. Go to: http://newrelic.com ' +
     'for more details.';
 };
 
-module.exports.notifyOnError = function(appError, request, response, next) {
-  fs.readFile('./config/administrators.json', 'utf8', function(readErr, data) {
-    if (readErr) {
-      console.error('Could not read administrators file: ' +
-                    readErr.toString());
-    } else {
-      var admins = JSON.parse(data);
-
-      _.each(admins, function(admin) {
-        var messageToSend = formatMessage(appError.message);
-        twilioClient.sendSms(admin.phoneNumber, messageToSend);
-      });
-    }
+exports.notifyOnError = function(appError, request, response, next) {
+  admins.forEach(function(admin) {
+    var messageToSend = formatMessage(appError.message);
+    twilioClient.sendSms(admin.phoneNumber, messageToSend);
   });
-  next();
+  next(appError);
 };

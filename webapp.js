@@ -60,7 +60,7 @@ app.use(function(request, response, next) {
 // Mount middleware to notify Twilio of errors
 app.use(twilioNotifications.notifyOnError);
 
-// Unhandled errors (500)
+// Handle Errors
 app.use(function(err, request, response, next) {
   console.error('An application error has occurred:');
   console.error(err.stack);
