@@ -1,5 +1,4 @@
 var twilioClient = require('../twilioClient');
-var fs = require('fs');
 var admins = require('../config/administrators.json');
 
 function formatMessage(errorToReport) {

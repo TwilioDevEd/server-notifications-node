@@ -24,12 +24,8 @@ to see how to run the application locally.</p>
 <li><a href="http://expressjs.com/starter/hello-world.html">Getting started with Express.js</a></li>
 <li><a href="http://twilio.github.io/twilio-node/">twilio-node library</a></li>
 </ul>
-</div><div data-file="config/administrators.json" class="step"><h2 id="list-server-admins">List server admins</h2>
-<p>Create a list of administrators who should be notified if a
-server error occurs.  The only requirement we have is a
-<code>phoneNumber</code>.</p>
 </div><div data-file="config.js" data-highlight="23-45" class="step"><h2 id="configure-twilio-client">Configure Twilio client</h2>
-<p>In order to send a message we&#39;ll need to create a <a href="http://twilio.github.io/twilio-node/#quickstart">Twilio REST
+<p>In order to send messages we&#39;ll need to create a <a href="http://twilio.github.io/twilio-node/#quickstart">Twilio REST
 client</a>, which
 requires reading our <code>TWILIO_ACCOUNT_SID</code>, <code>TWILIO_NUMBER</code>
 <code>TWILIO_AUTH_TOKEN</code> from the enviroment. We also make the
@@ -40,39 +36,31 @@ variables available through the <code>config</code> module.</p>
 <li><a href="http://twilio.github.io/twilio-node/#quickstart">twilio-node Quickstart</a></li>
 <li><a href="https://www.twilio.com/docs/api/rest">Twilio REST Web Service Interface</a></li>
 </ul>
-</div><div data-file="webapp.js" data-highlight="60-69" class="step"><h2 id="handle-all-the-exceptions-in-the-application">Handle all the exceptions in the application</h2>
+</div><div data-file="config/administrators.json" class="step"><h2 id="list-server-admins">List server admins</h2>
+<p>Here we create a list of administrators who should be notified if a
+server error occurs.  The only essential piece of data we need is a
+<code>phoneNumber</code> for each administrator.</p>
+</div><div data-file="webapp.js" data-highlight="60-62" class="step"><h2 id="handle-all-the-exceptions-in-the-application">Handle all the exceptions in the application</h2>
 <p>We will implement error handling and message delivery as a piece
 of <a href="http://expressjs.com/guide/using-middleware.html">Express.js
 middleware</a>. We
-will make all the Twilio API calls from there. It&#39;s important to
-call the <code>next</code> function so the next middleware in the stack can
-run. In this case, it&#39;s a handler for errors not handled
-elsewhere.</p>
+will make all the Twilio API calls from there.</p>
 <hr>
 <p><strong>See Also:</strong></p>
 <ul>
 <li><a href="http://expressjs.com/guide/using-middleware.html#middleware.error-handling">Error handling middleware</a></li>
 </ul>
-</div><div data-file="middleware/twilioNotifications.js" data-highlight="5-10" class="step"><h2 id="create-a-custom-alert-message">Create a custom alert message</h2>
-<p>Here we create an alert message to send out via text message. You might also
-decide to include a picture with your alert message, maybe a screenshot of the
-application when the crash happened?</p>
-</div><div data-file="middleware/twilioNotifications.js" data-highlight="13-25" class="step"><h2 id="read-the-admins-from-the-json-file">Read the admins from the JSON file</h2>
-<p>Next we read the admins from our JSON file
-and send alert messages to each of them with the private
-<code>sendSms</code> method in <code>twilioClient</code>.</p>
-<hr>
-<p><strong>See Also:</strong></p>
-<ul>
-<li><a href="https://nodejs.org/api/fs.html#fs_fs_readfile_filename_options_callback">fs.readFile function</a></li>
-</ul>
-</div><div data-file="twilioClient.js" data-highlight="4-17" class="step"><h2 id="send-a-text-message">Send a text message</h2>
+</div><div data-file="middleware/twilioNotifications.js" class="step"><h2 id="trigger-notifications-for-administrator-list">Trigger notifications for administrator list</h2>
+<p>In our Express middleware module, we read the admins from our JSON file
+and send alert messages to each of them with the <code>sendSms</code> method in 
+<code>twilioClient</code>. We also call <code>next</code> with the error object, which will
+allow other configured error handling middleware to execute.</p>
+</div><div data-file="twilioClient.js" class="step"><h2 id="send-a-text-message">Send a text message</h2>
 <p>There are the three parameters needed to <a href="http://twilio.github.io/twilio-node/#moreexamples">send an
 SMS</a>
 using the <a href="https://www.twilio.com/docs/api/rest">Twilio REST
 API</a>: <code>From</code>, <code>To</code>, and
-<code>Body</code>. After the message is sent, we print out the phone
-number we&#39;re texting. <a href="https://www.twilio.com/help/faq/sms/is-mms-supported-for-all-carriers-in-us-and-canada">US phone
+<code>Body</code>. <a href="https://www.twilio.com/help/faq/sms/is-mms-supported-for-all-carriers-in-us-and-canada">US and Canadian phone
 numbers</a>
 can also send an image with the message.</p>
 <hr>
@@ -98,9 +86,9 @@ with us, we&#39;d love to hear it. Tweet <a href="http://twitter.com/twilio">@tw
 to let us know what you think.</p>
 </div></div>
 <div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="config/administrators.json" data-mode="json">WwogIHsKICAgICJwaG9uZU51bWJlciI6ICIrMTU1NTc3Nzg4ODgiLAogICAgIm5hbWUiOiAiRG9yYWoiCiAgfSwKICB7CiAgICAicGhvbmVOdW1iZXIiOiAiKzE0NDQ3Nzc4ODg4IiwKICAgICJuYW1lIjogIk5pdmVrIgogIH0KXQo=</textarea>
-<textarea class="saurus-file" data-file="config.js" data-mode="javascript">dmFyIGRvdGVudiA9IHJlcXVpcmUoJ2RvdGVudicpOwp2YXIgY2ZnID0ge307CgppZiAocHJvY2Vzcy5lbnYuTk9ERV9FTlYgIT09ICdwcm9kdWN0aW9uJyAmJiBwcm9jZXNzLmVudi5OT0RFX0VOViAhPT0gJ3Rlc3QnKSB7CiAgZG90ZW52LmNvbmZpZyh7cGF0aDogJy5lbnYnfSk7Cn0gZWxzZSB7CiAgZG90ZW52LmNvbmZpZyh7cGF0aDogJy5lbnYudGVzdCcsIHNpbGVudDogdHJ1ZX0pOwp9CgovLyBIVFRQIFBvcnQgdG8gcnVuIG91ciB3ZWIgYXBwbGljYXRpb24KY2ZnLnBvcnQgPSBwcm9jZXNzLmVudi5QT1JUIHx8IDMwMDA7CgovLyBBIHJhbmRvbSBzdHJpbmcgdGhhdCB3aWxsIGhlbHAgZ2VuZXJhdGUgc2VjdXJlIG9uZS10aW1lIHBhc3N3b3JkcyBhbmQKLy8gSFRUUCBzZXNzaW9ucwpjZmcuc2VjcmV0ID0gcHJvY2Vzcy5lbnYuQVBQX1NFQ1JFVCB8fCAna2V5Ym9hcmQgY2F0JzsKCi8vIFlvdXIgVHdpbGlvIGFjY291bnQgU0lEIGFuZCBhdXRoIHRva2VuLCBib3RoIGZvdW5kIGF0OgovLyBodHRwczovL3d3dy50d2lsaW8uY29tL3VzZXIvYWNjb3VudAovLwovLyBBIGdvb2QgcHJhY3RpY2UgaXMgdG8gc3RvcmUgdGhlc2Ugc3RyaW5nIHZhbHVlcyBhcyBzeXN0ZW0gZW52aXJvbm1lbnQKLy8gdmFyaWFibGVzLCBhbmQgbG9hZCB0aGVtIGZyb20gdGhlcmUgYXMgd2UgYXJlIGRvaW5nIGJlbG93LiBBbHRlcm5hdGVseSwKLy8geW91IGNvdWxkIGhhcmQgY29kZSB0aGVzZSB2YWx1ZXMgaGVyZSBhcyBzdHJpbmdzLgpjZmcuYWNjb3VudFNpZCA9IHByb2Nlc3MuZW52LlRXSUxJT19BQ0NPVU5UX1NJRDsKY2ZnLmF1dGhUb2tlbiA9IHByb2Nlc3MuZW52LlRXSUxJT19BVVRIX1RPS0VOOwpjZmcuc2VuZGluZ051bWJlciA9IHByb2Nlc3MuZW52LlRXSUxJT19OVU1CRVI7Cgp2YXIgY29uZmlndXJlZCA9CiAgICAgIFtjZmcuYWNjb3VudFNpZCwgY2ZnLmF1dGhUb2tlbiwgY2ZnLnNlbmRpbmdOdW1iZXJdCiAgICAgIC5ldmVyeShmdW5jdGlvbihjb25maWdWYWx1ZSkgewogICAgICAgIGlmIChjb25maWdWYWx1ZSkgewogICAgICAgICAgcmV0dXJuIHRydWU7CiAgICAgICAgfSBlbHNlIHsKICAgICAgICAgIHJldHVybiBmYWxzZTsKICAgICAgICB9CiAgICAgIH0pOwoKaWYgKCFjb25maWd1cmVkKSB7CiAgdmFyIGVycm9yTWVzc2FnZSA9CiAgICAgICAgJ1RXSUxJT19BQ0NPVU5UX1NJRCwgVFdJTElPX0FVVEhfVE9LRU4sIGFuZCBUV0lMSU9fTlVNQkVSIG11c3QgYmUgc2V0JzsKCiAgdGhyb3cgbmV3IEVycm9yKGVycm9yTWVzc2FnZSk7Cn0KCi8vIEV4cG9ydCBjb25maWd1cmF0aW9uIG9iamVjdAptb2R1bGUuZXhwb3J0cyA9IGNmZzsK</textarea>
+<textarea class="saurus-file" data-file="config.js" data-mode="javascript">dmFyIGRvdGVudiA9IHJlcXVpcmUoJ2RvdGVudicpOwp2YXIgY2ZnID0ge307CgppZiAocHJvY2Vzcy5lbnYuTk9ERV9FTlYgIT09ICdwcm9kdWN0aW9uJyAmJiBwcm9jZXNzLmVudi5OT0RFX0VOViAhPT0gJ3Rlc3QnKSB7CiAgZG90ZW52LmNvbmZpZyh7cGF0aDogJy5lbnYnfSk7Cn0gZWxzZSB7CiAgZG90ZW52LmNvbmZpZyh7cGF0aDogJy5lbnYudGVzdCcsIHNpbGVudDogdHJ1ZX0pOwp9CgovLyBIVFRQIFBvcnQgdG8gcnVuIG91ciB3ZWIgYXBwbGljYXRpb24KY2ZnLnBvcnQgPSBwcm9jZXNzLmVudi5QT1JUIHx8IDMwMDA7CgovLyBBIHJhbmRvbSBzdHJpbmcgdGhhdCB3aWxsIGhlbHAgZ2VuZXJhdGUgc2VjdXJlIG9uZS10aW1lIHBhc3N3b3JkcyBhbmQKLy8gSFRUUCBzZXNzaW9ucwpjZmcuc2VjcmV0ID0gcHJvY2Vzcy5lbnYuQVBQX1NFQ1JFVCB8fCAna2V5Ym9hcmQgY2F0JzsKCi8vIFlvdXIgVHdpbGlvIGFjY291bnQgU0lEIGFuZCBhdXRoIHRva2VuLCBib3RoIGZvdW5kIGF0OgovLyBodHRwczovL3d3dy50d2lsaW8uY29tL3VzZXIvYWNjb3VudAovLwovLyBBIGdvb2QgcHJhY3RpY2UgaXMgdG8gc3RvcmUgdGhlc2Ugc3RyaW5nIHZhbHVlcyBhcyBzeXN0ZW0gZW52aXJvbm1lbnQKLy8gdmFyaWFibGVzLCBhbmQgbG9hZCB0aGVtIGZyb20gdGhlcmUgYXMgd2UgYXJlIGRvaW5nIGJlbG93LiBBbHRlcm5hdGVseSwKLy8geW91IGNvdWxkIGhhcmQgY29kZSB0aGVzZSB2YWx1ZXMgaGVyZSBhcyBzdHJpbmdzLgpjZmcuYWNjb3VudFNpZCA9IHByb2Nlc3MuZW52LlRXSUxJT19BQ0NPVU5UX1NJRDsKY2ZnLmF1dGhUb2tlbiA9IHByb2Nlc3MuZW52LlRXSUxJT19BVVRIX1RPS0VOOwpjZmcuc2VuZGluZ051bWJlciA9IHByb2Nlc3MuZW52LlRXSUxJT19OVU1CRVI7Cgp2YXIgcmVxdWlyZWRDb25maWcgPSBbY2ZnLmFjY291bnRTaWQsIGNmZy5hdXRoVG9rZW4sIGNmZy5zZW5kaW5nTnVtYmVyXTsKdmFyIGlzQ29uZmlndXJlZCA9IHJlcXVpcmVkQ29uZmlnLmV2ZXJ5KGZ1bmN0aW9uKGNvbmZpZ1ZhbHVlKSB7CiAgcmV0dXJuIGNvbmZpZ1ZhbHVlIHx8IGZhbHNlOwp9KTsKCmlmICghaXNDb25maWd1cmVkKSB7CiAgdmFyIGVycm9yTWVzc2FnZSA9CiAgICAnVFdJTElPX0FDQ09VTlRfU0lELCBUV0lMSU9fQVVUSF9UT0tFTiwgYW5kIFRXSUxJT19OVU1CRVIgbXVzdCBiZSBzZXQuJzsKCiAgdGhyb3cgbmV3IEVycm9yKGVycm9yTWVzc2FnZSk7Cn0KCi8vIEV4cG9ydCBjb25maWd1cmF0aW9uIG9iamVjdAptb2R1bGUuZXhwb3J0cyA9IGNmZzsK</textarea>
 <textarea class="saurus-file" data-file="webapp.js" data-mode="javascript">dmFyIHBhdGggPSByZXF1aXJlKCdwYXRoJyk7CnZhciBleHByZXNzID0gcmVxdWlyZSgnZXhwcmVzcycpOwp2YXIgYm9keVBhcnNlciA9IHJlcXVpcmUoJ2JvZHktcGFyc2VyJyk7CnZhciBzZXNzaW9uID0gcmVxdWlyZSgnZXhwcmVzcy1zZXNzaW9uJyk7CnZhciBmbGFzaCA9IHJlcXVpcmUoJ2Nvbm5lY3QtZmxhc2gnKTsKdmFyIG1vcmdhbiA9IHJlcXVpcmUoJ21vcmdhbicpOwp2YXIgY3N1cmYgPSByZXF1aXJlKCdjc3VyZicpOwoKdmFyIGNvbmZpZyA9IHJlcXVpcmUoJy4vY29uZmlnJyk7CnZhciB0d2lsaW9Ob3RpZmljYXRpb25zID0gcmVxdWlyZSgnLi9taWRkbGV3YXJlL3R3aWxpb05vdGlmaWNhdGlvbnMnKTsKCi8vIENyZWF0ZSBFeHByZXNzIHdlYiBhcHAKdmFyIGFwcCA9IGV4cHJlc3MoKTsKCi8vIFVzZSBtb3JnYW4gZm9yIEhUVFAgcmVxdWVzdCBsb2dnaW5nIGluIGRldiBhbmQgcHJvZAppZiAocHJvY2Vzcy5lbnYuTk9ERV9FTlYgIT09ICd0ZXN0JykgewogIGFwcC51c2UobW9yZ2FuKCdjb21iaW5lZCcpKTsKfQoKLy8gU2VydmUgc3RhdGljIGFzc2V0cwphcHAudXNlKGV4cHJlc3Muc3RhdGljKHBhdGguam9pbihfX2Rpcm5hbWUsICdwdWJsaWMnKSkpOwoKLy8gUGFyc2UgaW5jb21pbmcgZm9ybS1lbmNvZGVkIEhUVFAgYm9kaWVzCmFwcC51c2UoYm9keVBhcnNlci51cmxlbmNvZGVkKHsKICBleHRlbmRlZDogdHJ1ZQp9KSk7CgovLyBDcmVhdGUgYW5kIG1hbmFnZSBIVFRQIHNlc3Npb25zIGZvciBhbGwgcmVxdWVzdHMKYXBwLnVzZShzZXNzaW9uKHsKICBzZWNyZXQ6IGNvbmZpZy5zZWNyZXQsCiAgcmVzYXZlOiB0cnVlLAogIHNhdmVVbmluaXRpYWxpemVkOiB0cnVlCn0pKTsKCi8vIFVzZSBjb25uZWN0LWZsYXNoIHRvIHBlcnNpc3QgaW5mb3JtYXRpb25hbCBtZXNzYWdlcyBhY3Jvc3MgcmVkaXJlY3RzCmFwcC51c2UoZmxhc2goKSk7CgovLyBDb25maWd1cmUgYXBwbGljYXRpb24gcm91dGVzCnZhciByb3V0ZXMgPSByZXF1aXJlKCcuL2NvbnRyb2xsZXJzL3JvdXRlcicpOwp2YXIgcm91dGVyID0gZXhwcmVzcy5Sb3V0ZXIoKTsKCi8vIEFkZCBDU1JGIHByb3RlY3Rpb24gZm9yIHdlYiByb3V0ZXMKaWYgKHByb2Nlc3MuZW52Lk5PREVfRU5WICE9PSAndGVzdCcpIHsKICBhcHAudXNlKGNzdXJmKCkpOwogIGFwcC51c2UoZnVuY3Rpb24ocmVxdWVzdCwgcmVzcG9uc2UsIG5leHQpIHsKICAgIHJlc3BvbnNlLmxvY2Fscy5jc3JmdG9rZW4gPSByZXF1ZXN0LmNzcmZUb2tlbigpOwogICAgbmV4dCgpOwogIH0pOwp9Cgpyb3V0ZXMocm91dGVyKTsKYXBwLnVzZShyb3V0ZXIpOwoKLy8gSGFuZGxlIDQwNAphcHAudXNlKGZ1bmN0aW9uKHJlcXVlc3QsIHJlc3BvbnNlLCBuZXh0KSB7CiAgcmVzcG9uc2Uuc3RhdHVzKDQwNCk7CiAgcmVzcG9uc2Uuc2VuZEZpbGUocGF0aC5qb2luKF9fZGlybmFtZSwgJ3B1YmxpYycsICc0MDQuaHRtbCcpKTsKfSk7CgovLyBNb3VudCBtaWRkbGV3YXJlIHRvIG5vdGlmeSBUd2lsaW8gb2YgZXJyb3JzCmFwcC51c2UodHdpbGlvTm90aWZpY2F0aW9ucy5ub3RpZnlPbkVycm9yKTsKCi8vIEhhbmRsZSBFcnJvcnMKYXBwLnVzZShmdW5jdGlvbihlcnIsIHJlcXVlc3QsIHJlc3BvbnNlLCBuZXh0KSB7CiAgY29uc29sZS5lcnJvcignQW4gYXBwbGljYXRpb24gZXJyb3IgaGFzIG9jY3VycmVkOicpOwogIGNvbnNvbGUuZXJyb3IoZXJyLnN0YWNrKTsKICByZXNwb25zZS5zdGF0dXMoNTAwKTsKICByZXNwb25zZS5zZW5kRmlsZShwYXRoLmpvaW4oX19kaXJuYW1lLCAncHVibGljJywgJzUwMC5odG1sJykpOwp9KTsKCi8vIEV4cG9ydCBFeHByZXNzIGFwcAptb2R1bGUuZXhwb3J0cyA9IGFwcDsK</textarea>
-<textarea class="saurus-file" data-file="middleware/twilioNotifications.js" data-mode="javascript">dmFyIHR3aWxpb0NsaWVudCA9IHJlcXVpcmUoJy4uL3R3aWxpb0NsaWVudCcpOwp2YXIgZnMgPSByZXF1aXJlKCdmcycpOwp2YXIgYWRtaW5zID0gcmVxdWlyZSgnLi4vY29uZmlnL2FkbWluaXN0cmF0b3JzLmpzb24nKTsKCmZ1bmN0aW9uIGZvcm1hdE1lc3NhZ2UoZXJyb3JUb1JlcG9ydCkgewogIHJldHVybiAnW1RoaXMgaXMgYSB0ZXN0XSBBTEVSVCEgSXQgYXBwZWFycyB0aGUgc2VydmVyIGlzJyArCiAgICAnaGF2aW5nIGlzc3Vlcy4gRXhjZXB0aW9uOiAnICsgZXJyb3JUb1JlcG9ydCArCiAgICAnLiBHbyB0bzogaHR0cDovL25ld3JlbGljLmNvbSAnICsKICAgICdmb3IgbW9yZSBkZXRhaWxzLic7Cn07CgpleHBvcnRzLm5vdGlmeU9uRXJyb3IgPSBmdW5jdGlvbihhcHBFcnJvciwgcmVxdWVzdCwgcmVzcG9uc2UsIG5leHQpIHsKICBhZG1pbnMuZm9yRWFjaChmdW5jdGlvbihhZG1pbikgewogICAgdmFyIG1lc3NhZ2VUb1NlbmQgPSBmb3JtYXRNZXNzYWdlKGFwcEVycm9yLm1lc3NhZ2UpOwogICAgdHdpbGlvQ2xpZW50LnNlbmRTbXMoYWRtaW4ucGhvbmVOdW1iZXIsIG1lc3NhZ2VUb1NlbmQpOwogIH0pOwogIG5leHQoYXBwRXJyb3IpOwp9Owo=</textarea>
-<textarea class="saurus-file" data-file="twilioClient.js" data-mode="javascript">dmFyIGNvbmZpZyA9IHJlcXVpcmUoJy4vY29uZmlnJyk7CnZhciBjbGllbnQgPSByZXF1aXJlKCd0d2lsaW8nKShjb25maWcuYWNjb3VudFNpZCwgY29uZmlnLmF1dGhUb2tlbik7Cgptb2R1bGUuZXhwb3J0cy5zZW5kU21zID0gZnVuY3Rpb24odG8sIG1lc3NhZ2UpIHsKICBjbGllbnQubWVzc2FnZXMuY3JlYXRlKHsKICAgIGJvZHk6IG1lc3NhZ2UsCiAgICB0bzogdG8sCiAgICBmcm9tOiBjb25maWcuc2VuZGluZ051bWJlcgovLyAgbWVkaWFVcmw6IGltYWdlVXJsCiAgfSwgZnVuY3Rpb24oZXJyLCBkYXRhKSB7CiAgICBpZiAoZXJyKSB7CiAgICAgIGNvbnNvbGUuZXJyb3IoJ0NvdWxkIG5vdCBub3RpZnkgYWRtaW5pc3RyYXRvcicpOwogICAgICBjb25zb2xlLmVycm9yKGVycik7CiAgICB9IGVsc2UgewogICAgICBjb25zb2xlLmxvZygnQWRtaW5pc3RyYXRvciBub3RpZmllZCcpOwogICAgfQogIH0pOwp9Owo=</textarea>
+<textarea class="saurus-file" data-file="middleware/twilioNotifications.js" data-mode="javascript">dmFyIHR3aWxpb0NsaWVudCA9IHJlcXVpcmUoJy4uL3R3aWxpb0NsaWVudCcpOwp2YXIgYWRtaW5zID0gcmVxdWlyZSgnLi4vY29uZmlnL2FkbWluaXN0cmF0b3JzLmpzb24nKTsKCmZ1bmN0aW9uIGZvcm1hdE1lc3NhZ2UoZXJyb3JUb1JlcG9ydCkgewogIHJldHVybiAnW1RoaXMgaXMgYSB0ZXN0XSBBTEVSVCEgSXQgYXBwZWFycyB0aGUgc2VydmVyIGlzJyArCiAgICAnaGF2aW5nIGlzc3Vlcy4gRXhjZXB0aW9uOiAnICsgZXJyb3JUb1JlcG9ydCArCiAgICAnLiBHbyB0bzogaHR0cDovL25ld3JlbGljLmNvbSAnICsKICAgICdmb3IgbW9yZSBkZXRhaWxzLic7Cn07CgpleHBvcnRzLm5vdGlmeU9uRXJyb3IgPSBmdW5jdGlvbihhcHBFcnJvciwgcmVxdWVzdCwgcmVzcG9uc2UsIG5leHQpIHsKICBhZG1pbnMuZm9yRWFjaChmdW5jdGlvbihhZG1pbikgewogICAgdmFyIG1lc3NhZ2VUb1NlbmQgPSBmb3JtYXRNZXNzYWdlKGFwcEVycm9yLm1lc3NhZ2UpOwogICAgdHdpbGlvQ2xpZW50LnNlbmRTbXMoYWRtaW4ucGhvbmVOdW1iZXIsIG1lc3NhZ2VUb1NlbmQpOwogIH0pOwogIG5leHQoYXBwRXJyb3IpOwp9Owo=</textarea>
+<textarea class="saurus-file" data-file="twilioClient.js" data-mode="javascript">dmFyIGNvbmZpZyA9IHJlcXVpcmUoJy4vY29uZmlnJyk7CnZhciBjbGllbnQgPSByZXF1aXJlKCd0d2lsaW8nKShjb25maWcuYWNjb3VudFNpZCwgY29uZmlnLmF1dGhUb2tlbik7Cgptb2R1bGUuZXhwb3J0cy5zZW5kU21zID0gZnVuY3Rpb24odG8sIG1lc3NhZ2UpIHsKICBjbGllbnQubWVzc2FnZXMuY3JlYXRlKHsKICAgIGJvZHk6IG1lc3NhZ2UsCiAgICB0bzogdG8sCiAgICBmcm9tOiBjb25maWcuc2VuZGluZ051bWJlcgogICAgLy8gbWVkaWFVcmw6ICdodHRwOi8vd3d3LnlvdXJzZXJ2ZXIuY29tL3NvbWVpbWFnZS5wbmcnCiAgfSwgZnVuY3Rpb24oZXJyLCBkYXRhKSB7CiAgICBpZiAoZXJyKSB7CiAgICAgIGNvbnNvbGUuZXJyb3IoJ0NvdWxkIG5vdCBub3RpZnkgYWRtaW5pc3RyYXRvcicpOwogICAgICBjb25zb2xlLmVycm9yKGVycik7CiAgICB9IGVsc2UgewogICAgICBjb25zb2xlLmxvZygnQWRtaW5pc3RyYXRvciBub3RpZmllZCcpOwogICAgfQogIH0pOwp9Owo=</textarea>
 </div>
 </div><div class="saurus-overview"><ul></ul></div></div><div class="saurus-code"><div class="file-path"><span class="crumb-container"></span><i class="fa fa-fw fa-folder"></i></div><div class="saurus-editor"></div></div><div class="saurus-explorer"><div class="saurus-file-list"></div><a href="https://github.com/TwilioDevEd/server-notifications-laravel" target="_blank" class="explorer-get-code"> <i class="fa fa-lg fa-github-square"> </i>View Code on GitHub</a></div></div></div></div><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script><script src="ace/ace.js"></script><script src="ace/theme-monokai.js"></script><script src="viewsaurus.js"></script></body></html>

@@ -6,7 +6,7 @@ module.exports.sendSms = function(to, message) {
     body: message,
     to: to,
     from: config.sendingNumber
-//  mediaUrl: imageUrl
+    // mediaUrl: 'http://www.yourserver.com/someimage.png'
   }, function(err, data) {
     if (err) {
       console.error('Could not notify administrator');
