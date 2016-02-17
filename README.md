@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/call-tracking-node.svg?branch=master)](https://travis-ci.org/TwilioDevEd/server-notifications-node)
 
-This application demostrates how to use Twilio to send alerts when
-your errors happen in your application
+Use Twilio to send SMS alerts so that you never miss a critical issue.
+
+[Read the full tutorial here](https://www.twilio.com/docs/tutorials/walkthrough/server-notifications/node/express)!
 
 ## Running the Project on Your Machine
 
