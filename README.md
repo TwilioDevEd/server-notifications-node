@@ -29,7 +29,7 @@ This should install all of our project dependencies from npm into a local
 
 ### Configuration
 
-Next, open `.env.sample` at the root of the project and update it with
+Next, open `.env.example` at the root of the project and update it with
 values from your
 [Twilio account](https://www.twilio.com/user/account/voice-messaging)
 and local configuration. Save the file as `.env`.  You'll need to set
