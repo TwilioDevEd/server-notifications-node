@@ -7,11 +7,9 @@ module.exports.sendSms = function(to, message) {
     to: to,
     from: config.sendingNumber
 //  mediaUrl: imageUrl
-  })
-  .then(function(data) {
+  }).then(function(data) {
     console.log('Administrator notified');
-  })
-  .catch(function(err) {
+  }).catch(function(err) {
     console.error('Could not notify administrator');
     console.error(err);
   });
