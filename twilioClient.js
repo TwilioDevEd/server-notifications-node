@@ -7,12 +7,12 @@ module.exports.sendSms = function(to, message) {
     to: to,
     from: config.sendingNumber
 //  mediaUrl: imageUrl
-  }, function(err, data) {
-    if (err) {
-      console.error('Could not notify administrator');
-      console.error(err);
-    } else {
-      console.log('Administrator notified');
-    }
+  })
+  .then(function(data) {
+    console.log('Administrator notified');
+  })
+  .catch(function(err, data) {
+    console.error('Could not notify administrator');
+    console.error(err);
   });
 };
