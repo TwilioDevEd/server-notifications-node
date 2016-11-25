@@ -44,7 +44,7 @@ if you don't have one already.
 1. Navigate to the project directory in your terminal and run:
 
     ```bash
-    npm install
+    $ npm install
     ```
 
     This should install all of our project dependencies from npm into a local
@@ -67,8 +67,8 @@ if you don't have one already.
     informing you of an exception.
 
     ```bash
-    npm install -g nodemon
-    nodemon .
+    $ npm install -g nodemon
+    $ nodemon .
     ```
 
 

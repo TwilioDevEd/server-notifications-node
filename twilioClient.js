@@ -5,8 +5,8 @@ module.exports.sendSms = function(to, message) {
   client.messages.create({
     body: message,
     to: to,
-    from: config.sendingNumber
-//  mediaUrl: imageUrl
+    from: config.sendingNumber,
+    mediaUrl: imageUrl
   }).then(function(data) {
     console.log('Administrator notified');
   }).catch(function(err) {
