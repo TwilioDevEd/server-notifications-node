@@ -11,7 +11,7 @@ module.exports.sendSms = function(to, message) {
   .then(function(data) {
     console.log('Administrator notified');
   })
-  .catch(function(err, data) {
+  .catch(function(err) {
     console.error('Could not notify administrator');
     console.error(err);
   });
