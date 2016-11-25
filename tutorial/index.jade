@@ -3,12 +3,12 @@
     :markdown
       ## What does this thing do?
 
-      This [Express.js](http://expressjs.com/) sample application
+      This [Express.js](//expressjs.com/) sample application
       demonstrates how to send SMS alerts to a list of system
       administrators if something goes wrong on your server. In this
       tutorial, we'll show you the key bits of code to make this work.
       Head to the [application's
-      README.md](https://github.com/TwilioDevEd/server-notifications-node)
+      README.md](//github.com/TwilioDevEd/server-notifications-node)
       to see how to run the application locally.
 
       Let's get started!
@@ -16,15 +16,15 @@
       ---
 
       **See Also:**
-      * [Getting started with Express.js](http://expressjs.com/starter/hello-world.html)
-      * [twilio-node library](http://twilio.github.io/twilio-node/)
+      * [Getting started with Express.js](//expressjs.com/starter/hello-world.html)
+      * [twilio-node library](//twilio.github.io/twilio-node/)
 
   .step(data-file='config.js', data-highlight='23-45')
     :markdown
       ## Configure Twilio client
 
       In order to send messages we'll need to create a [Twilio REST
-      client](http://twilio.github.io/twilio-node/#quickstart), which
+      client](//twilio.github.io/twilio-node/#quickstart), which
       requires reading our `TWILIO_ACCOUNT_SID`, `TWILIO_NUMBER`
       `TWILIO_AUTH_TOKEN` from the enviroment. We also make the
       variables available through the `config` module.
@@ -32,8 +32,8 @@
       ---
 
       **See Also:**
-      * [twilio-node Quickstart](http://twilio.github.io/twilio-node/#quickstart)
-      * [Twilio REST Web Service Interface](https://www.twilio.com/docs/api/rest)
+      * [twilio-node Quickstart](//twilio.github.io/twilio-node/#quickstart)
+      * [Twilio REST Web Service Interface](//www.twilio.com/docs/api/rest)
 
   .step(data-file='config/administrators.json')
     :markdown
@@ -49,20 +49,20 @@
 
       We will implement error handling and message delivery as a piece
       of [Express.js
-      middleware](http://expressjs.com/guide/using-middleware.html). We
+      middleware](//expressjs.com/guide/using-middleware.html). We
       will make all the Twilio API calls from there.
 
       ---
 
       **See Also:**
-      * [Error handling middleware](http://expressjs.com/guide/using-middleware.html#middleware.error-handling)
+      * [Error handling middleware](//expressjs.com/guide/using-middleware.html#middleware.error-handling)
 
   .step(data-file='middleware/twilioNotifications.js')
     :markdown
       ## Trigger notifications for administrator list
 
       In our Express middleware module, we read the admins from our JSON file
-      and send alert messages to each of them with the `sendSms` method in 
+      and send alert messages to each of them with the `sendSms` method in
       `twilioClient`. We also call `next` with the error object, which will
       allow other configured error handling middleware to execute.
 
@@ -71,43 +71,41 @@
       ## Send a text message
 
       There are the three parameters needed to [send an
-      SMS](http://twilio.github.io/twilio-node/#moreexamples)
+      SMS](//twilio.github.io/twilio-node/#moreexamples)
       using the [Twilio REST
-      API](https://www.twilio.com/docs/api/rest): `From`, `To`, and
+      API](//www.twilio.com/docs/api/rest): `From`, `To`, and
       `Body`. [US and Canadian phone
-      numbers](https://www.twilio.com/help/faq/sms/is-mms-supported-for-all-carriers-in-us-and-canada)
+      numbers](//www.twilio.com/help/faq/sms/is-mms-supported-for-all-carriers-in-us-and-canada)
       can also send an image with the message.
 
       ---
 
       **See Also:**
-      * [REST API Docs for Message resource](https://www.twilio.com/docs/api/rest/message)
-      * [Your message logs in the account portal](https://www.twilio.com/user/account/log/messages)
+      * [REST API Docs for Message resource](//www.twilio.com/docs/api/rest/message)
+      * [Your message logs in the account portal](//www.twilio.com/user/account/log/messages)
 
   .step
     :markdown
       ## Where to next?
 
-      That's it! We've just implemented an automated server notification system 
+      That's it! We've just implemented an automated server notification system
       that can send you server alerts if anything goes wrong. If you're a Node.js
       developer working with Twilio, you might want to check out these other
       tutorials.
 
-      [**Two-Factor Authentication**](https://www.twilio.com/docs/howto/walkthrough/two-factor-authentication/node/express)
+      [**Two-Factor Authentication**](//www.twilio.com/docs/howto/walkthrough/two-factor-authentication/node/express)
 
       Increase the security of your login system by verifying a user's mobile
       phone in addition to their password.
 
-      [**SMS and MMS marketing notifications**](https://www.twilio.com/docs/howto/walkthrough/marketing-notifications/node/express)
+      [**SMS and MMS marketing notifications**](//www.twilio.com/docs/howto/walkthrough/marketing-notifications/node/express)
 
       SMS and MMS messages are a personal way to engage with users, offering
       a much higher open rate than e-mail and more impact than a tweet.
 
 
-
       ### Did this help?
 
-      Thanks for checking out this tutorial! If you have any feedback to share 
-      with us, we'd love to hear it. Tweet [@twilio](http://twitter.com/twilio) 
-      to let us know what you think.
-
+      Thanks for checking out this tutorial! If you have any feedback
+      to share with us, we'd love to hear it. [Contact the Twilio Developer
+      Education Team](mailto:deved-oss@twilio.com) to let us know what you think.
