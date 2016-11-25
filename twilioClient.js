@@ -6,13 +6,13 @@ module.exports.sendSms = function(to, message) {
     body: message,
     to: to,
     from: config.sendingNumber
-    // mediaUrl: 'http://www.yourserver.com/someimage.png'
-  }, function(err, data) {
-    if (err) {
-      console.error('Could not notify administrator');
-      console.error(err);
-    } else {
-      console.log('Administrator notified');
-    }
+//  mediaUrl: imageUrl
+  })
+  .then(function(data) {
+    console.log('Administrator notified');
+  })
+  .catch(function(err) {
+    console.error('Could not notify administrator');
+    console.error(err);
   });
 };
