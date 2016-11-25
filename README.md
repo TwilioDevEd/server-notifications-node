@@ -29,7 +29,7 @@ if you don't have one already.
 
 1. Next, open `.env.example` at the root of the project and update it with
    values from your
-   [Twilio account](https://www.twilio.com/user/account/voice-messaging)
+   [Twilio account](https://www.twilio.com/console)
    and local configuration. Save the file as `.env`.  You'll need to set
    `TWILIO_AUTH_TOKEN`, `TWILIO_ACCOUNT_SID`, and `TWILIO_NUMBER`.
 
@@ -43,18 +43,18 @@ if you don't have one already.
 
 1. Navigate to the project directory in your terminal and run:
 
-    ```bash
-    $ npm install
-    ```
+  ```bash
+  $ npm install
+  ```
 
     This should install all of our project dependencies from npm into a local
     `node_modules` folder.
 
 1. Make sure the tests succeed.
 
-     ```bash
-     $ npm test
-     ```
+   ```bash
+   $ npm test
+   ```
 
 1.  To launch the application, you can use `node .` in the project's root directory.
     You might also consider using [nodemon](https://github.com/remy/nodemon) for
