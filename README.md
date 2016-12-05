@@ -39,7 +39,7 @@ For the `TWILIO_NUMBER` variable you'll need to provision a new number
 in the
 [Manage Numbers page](https://www.twilio.com/user/account/phone-numbers/incoming)
 under your account. The phone number should be in
-[E.164 format](https://www.twilio.com/help/faq/phone-numbers/how-do-i-format-phone-numbers-to-work-internationally)
+[E.164 format](https://www.twilio.com/help/faq/phone-numbers/how-do-i-format-phone-numbers-to-work-internationally).
 
 ### Running the Project
 
