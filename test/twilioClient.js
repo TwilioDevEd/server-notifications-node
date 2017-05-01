@@ -1,17 +1,11 @@
-var expect = require('chai').expect;
-var supertest = require('supertest');
 var mockery = require('mockery');
 var stub = require('sinon').stub;
+var expect = require('chai').expect;
 
-var app = require('../webapp');
-var config = require('../config');
-
-describe('Twilio notifications on error', function() {
-  var agent = supertest(app);
+describe('twilioClient', function(){
   var msgCreateStub;
 
-  before(() => {
-    // mockery.deregisterAll();
+  before(function(){
     mockery.enable({
       useCleanCache: true,
       warnOnReplace: false,
@@ -38,14 +32,18 @@ describe('Twilio notifications on error', function() {
     mockery.disable();
   });
 
-  describe('GET /error', function() {
-    it('should return an error', function() {
-      return agent
-        .get('/error')
-        .expect(function(res) {
-          expect(res.status).to.equal(500);
-          expect(msgCreateStub.calledTwice).to.be.true;
-        });
-      });
+  it('should send sms message and return promise with result', function() {
+   // Arrange
+   var twilioClient = require('../twilioClient');
+   var toNumber = '+15555555555';
+   var message = 'test message';
+
+   // Act
+   return twilioClient
+    .sendSms(toNumber, message)
+    .then(() => {
+      // Assert
+      expect(msgCreateStub.called).to.be.true;
+    });
   });
 });
