@@ -4,7 +4,7 @@
   "description": "Send SMS notifications on exceptions thrown by your Node.js application",
   "main": "index.js",
   "scripts": {
-    "test": "export NODE_ENV=test && mocha test"
+    "test": "NODE_ENV=test node_modules/.bin/mocha test"
   },
   "repository": {
     "type": "git",
@@ -24,22 +24,26 @@
     "url": "https://github.com/TwilioDevEd/server-notifications-node/issues"
   },
   "homepage": "https://github.com/TwilioDevEd/server-notifications-node",
-  "engines" : { "node" : ">=4.1.0 <5.5.0" },
+  "engines": {
+    "node": ">=4.1.0"
+  },
   "dependencies": {
     "body-parser": "^1.12.0",
     "connect-flash": "^0.1.1",
     "csurf": "^1.8.3",
-    "dotenv": "^1.2.0",
+    "dotenv": "^2.0.0",
     "express": "^4.12.0",
     "express-session": "^1.10.3",
     "morgan": "^1.5.1",
     "sanitize-html": "^1.10.0",
-    "twilio": "^1.11.1",
+    "twilio": "~3.0.0-rc.16",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
-    "chai": "^2.1.0",
-    "mocha": "^2.3.0",
-    "supertest": "^1.1.0"
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
+    "mockery": "^2.0.0",
+    "sinon": "^2.1.0",
+    "supertest": "^2.0.1"
   }
 }
