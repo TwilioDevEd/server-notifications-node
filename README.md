@@ -37,7 +37,7 @@ if you don't have one already.
    in the
    [Manage Numbers page](https://www.twilio.com/user/account/phone-numbers/incoming)
    under your account. The phone number should be in
-   [E.164 format](https://www.twilio.com/help/faq/phone-numbers/how-do-i-format-phone-numbers-to-work-internationally)
+   [E.164 format](https://support.twilio.com/hc/en-us/articles/223183008-Formatting-International-Phone-Numbers)
 
     Run `source .env` to export the environment variables.
 
