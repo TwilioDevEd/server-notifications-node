@@ -4,7 +4,7 @@
 
 # Server notifications with Twilio, Node.js, and Express
 
-[![Build Status](https://travis-ci.org/TwilioDevEd/call-tracking-node.svg?branch=master)](https://travis-ci.org/TwilioDevEd/server-notifications-node)
+[![Node.js CI](https://github.com/TwilioDevEd/server-notifications-node/actions/workflows/node.js.yml/badge.svg)](https://github.com/TwilioDevEd/server-notifications-node/actions/workflows/node.js.yml)
 
 Use Twilio to send SMS alerts so that you never miss a critical issue.
 
