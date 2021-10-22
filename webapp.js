@@ -60,6 +60,18 @@ app.use(function(request, response, next) {
 // Mount middleware to notify Twilio of errors
 app.use(twilioNotifications.notifyOnError);
 
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err,
+    });
+  });
+}
+
 // Handle Errors
 app.use(function(err, request, response, next) {
   console.error('An application error has occurred:');
