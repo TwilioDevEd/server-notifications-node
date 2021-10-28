@@ -23,11 +23,11 @@ if you don't have one already.
 1. First clone this repository and `cd` into it.
 
    ```bash
-   $ git clone git@github.com:TwilioDevEd/server-notifications-node.git
-   $ cd server-notifications-node
+   git clone git@github.com:TwilioDevEd/server-notifications-node.git
+   cd server-notifications-node
    ```
 
-1. Next, open `.env.example` at the root of the project and update it with
+1. Next, copy the sample configuration file `.env.example` at the root of the project and update it with
    values from your
    [Twilio account](https://www.twilio.com/console)
    and local configuration. Save the file as `.env`.  You'll need to set
@@ -39,21 +39,23 @@ if you don't have one already.
    under your account. The phone number should be in
    [E.164 format](https://support.twilio.com/hc/en-us/articles/223183008-Formatting-International-Phone-Numbers)
 
-    Run `source .env` to export the environment variables.
+   ```bash
+   cp .env.example .env
+   ```
 
 1. Navigate to the project directory in your terminal and run:
 
-  ```bash
-  $ npm install
-  ```
+   ```bash
+   npm install
+   ```
 
-    This should install all of our project dependencies from npm into a local
-    `node_modules` folder.
+   This should install all of our project dependencies from npm into a local
+   `node_modules` folder.
 
 1. Make sure the tests succeed.
 
    ```bash
-   $ npm test
+   npm test
    ```
 
 1.  To launch the application, you can use `node .` in the project's root directory.
@@ -67,8 +69,8 @@ if you don't have one already.
     informing you of an exception.
 
     ```bash
-    $ npm install -g nodemon
-    $ nodemon .
+    npm install -g nodemon
+    nodemon .
     ```
 
 
