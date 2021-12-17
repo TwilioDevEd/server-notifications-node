@@ -37,7 +37,7 @@
     "morgan": "^1.5.1",
     "sanitize-html": "^1.10.0",
     "twilio": "~3.0.0-rc.16",
-    "underscore": "^1.8.3"
+    "underscore": "^1.13.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
