@@ -36,7 +36,7 @@
     "express-session": "^1.10.3",
     "morgan": "^1.5.1",
     "sanitize-html": "^1.10.0",
-    "twilio": "~3.0.0-rc.16",
+    "twilio": "~3.77.3",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
