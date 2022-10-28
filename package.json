@@ -35,7 +35,7 @@
     "express": "^4.12.0",
     "express-session": "^1.10.3",
     "morgan": "^1.5.1",
-    "sanitize-html": "^1.10.0",
+    "sanitize-html": "^2.7.3",
     "twilio": "~3.0.0-rc.16",
     "underscore": "^1.8.3"
   },
